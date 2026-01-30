@@ -1,4 +1,4 @@
-import { FiActivity } from 'react-icons/fi';
+
 
 export default function StatsVisualization() {
   // Generate dummy heat map data
@@ -37,8 +37,6 @@ export default function StatsVisualization() {
               <div key={weekIndex} className="flex flex-col gap-1">
                 {Array.from({ length: 7 }).map((_, dayIndex) => {
                   // Simulate some data
-                  const isActive = Math.random() > 0.8;
-                  const intensity = Math.random();
                   let colorClass = "bg-gray-800"; // empty
                   
                   // Make the last few columns more active to match "Jan" in screenshot

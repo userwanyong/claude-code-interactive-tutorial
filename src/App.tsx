@@ -19,13 +19,20 @@ function App() {
   const [currentToastAchievement, setCurrentToastAchievement] = useState<{ title: string; description: string; icon: string } | null>(null);
   const [newAchievementsCount, setNewAchievementsCount] = useState(0);
   const lastProcessedAchievementsRef = useRef<string[]>([]);
-  const { progress, completeStep, completeModule, addMasteredCommand, isStepCompleted, checkAchievements } = useProgress();
+  const { progress, completeStep, completeModule, addMasteredCommand, isStepCompleted } = useProgress();
 
   useEffect(() => {
     if (!progress) return;
 
     const currentAchievementIds = progress.achievements.map(a => a.id);
-    const newAchievementIds = currentAchievementIds.filter(id => !lastProcessedAchievementsRef.current.includes(id));
+    
+    // 从 localStorage 获取已展示过的成就
+    const shownAchievements = JSON.parse(localStorage.getItem('shown_achievements') || '[]');
+    
+    // 过滤出真正新的成就：既不在当前会话的 ref 中，也不在历史记录 shown_achievements 中
+    const newAchievementIds = currentAchievementIds.filter(id => 
+      !lastProcessedAchievementsRef.current.includes(id) && !shownAchievements.includes(id)
+    );
 
     if (newAchievementIds.length > 0) {
       setNewAchievementsCount(prev => prev + newAchievementIds.length);
@@ -42,8 +49,13 @@ function App() {
         }, index * 1500);
       });
 
-      lastProcessedAchievementsRef.current = currentAchievementIds;
+      // 更新 localStorage，记录这些成就已展示过
+      const updatedShownAchievements = [...new Set([...shownAchievements, ...newAchievementIds])];
+      localStorage.setItem('shown_achievements', JSON.stringify(updatedShownAchievements));
     }
+    
+    // 无论是否显示 Toast，都更新 ref，防止当前会话重复处理
+    lastProcessedAchievementsRef.current = currentAchievementIds;
   }, [progress?.achievements]);
 
   const handleAchievementsClick = () => {
@@ -174,6 +186,10 @@ function App() {
                   presetCommands={getPresetCommands()}
                   className="sticky top-6"
                 />
+                <div className="flex flex-col items-center justify-center pt-8 text-center">
+                  <p className="text-gray-400 text-sm">&copy; {new Date().getFullYear()} wanyj. All rights reserved.</p>
+                  <p className="text-gray-400 text-xs mt-1">Designed for learning Claude Code CLI.</p>
+                </div>
               </div>
             </div>
           </div>

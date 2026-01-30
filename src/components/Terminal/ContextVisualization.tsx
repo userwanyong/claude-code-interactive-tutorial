@@ -1,4 +1,4 @@
-import { FiDatabase, FiCpu, FiMessageSquare, FiPackage, FiGrid, FiXSquare } from 'react-icons/fi';
+import { FiDatabase, FiCpu, FiMessageSquare, FiPackage, FiXSquare } from 'react-icons/fi';
 
 export default function ContextVisualization() {
   // Mock grid data based on the image

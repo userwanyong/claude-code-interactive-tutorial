@@ -51,12 +51,12 @@ export default function Sidebar({ currentModule, onModuleSelect, progress }: Sid
                 key={module.id}
                 onClick={() => isUnlocked && onModuleSelect(module.id)}
                 disabled={!isUnlocked}
-                className={`w-full text-left p-3 rounded-lg transition-all ${
+                className={`w-full text-left p-3 rounded-lg transition-all duration-200 ${
                   isActive
-                    ? 'bg-red-50 border-2 border-red-600 shadow-sm'
+                    ? 'bg-red-50 border border-red-500 shadow-md transform scale-[1.02]'
                     : isUnlocked
-                    ? 'bg-white border-2 border-gray-200 hover:border-red-400 hover:bg-red-50/50'
-                    : 'bg-gray-100 border-2 border-gray-200 cursor-not-allowed opacity-60'
+                    ? 'bg-white border border-gray-200 hover:border-red-300 hover:bg-red-50/30 hover:shadow-sm'
+                    : 'bg-gray-50 border border-gray-200 cursor-not-allowed opacity-60'
                 }`}
               >
                 <div className="flex items-start justify-between mb-2">
@@ -70,7 +70,7 @@ export default function Sidebar({ currentModule, onModuleSelect, progress }: Sid
                     )}
                     <span
                       className={`font-medium text-sm ${
-                        isActive ? 'text-red-600' : 'text-gray-900'
+                        isActive ? 'text-red-700 font-bold' : 'text-gray-900'
                       }`}
                     >
                       {module.title}

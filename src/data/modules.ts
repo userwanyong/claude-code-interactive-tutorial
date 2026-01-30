@@ -64,7 +64,7 @@ export const modules: LearningModule[] = [
       {
         id: 'step-1-10',
         title: '导出对话',
-        description: '将当前对话导出',
+        description: '导出当前对话',
         instruction: '输入 /export 导出对话',
         commands: ['/export'],
         expectedOutput: 'Conversation exported...',
@@ -243,7 +243,7 @@ export const modules: LearningModule[] = [
       }
     ],
     prerequisites: [],
-    estimatedTime: 45
+    estimatedTime: 3
   }
 ];
 

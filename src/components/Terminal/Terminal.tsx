@@ -42,28 +42,35 @@ export default function Terminal({ onCommandExecuted, presetCommands = [], class
 
   return (
     <div 
-      className={`flex flex-col bg-[#1a1a1a] rounded-lg shadow-xl overflow-hidden ${className}`}
+      className={`flex flex-col bg-[#1e1e1e] rounded-xl shadow-2xl overflow-hidden border border-[#333] ${className}`}
       onClick={handleContainerClick}
     >
-      <div className="flex items-center justify-between px-4 py-3 bg-[#252525] border-b border-[#333]">
-        <div className="flex items-center gap-2">
-          <FiTerminal className="text-[#D97757]" size={20} />
-          <span className="text-white font-medium">Claude Code 终端</span>
+      <div className="relative flex items-center justify-center px-4 py-3 bg-[#2d2d2d] border-b border-[#333]">
+        <div className="absolute left-4 flex items-center gap-2">
+          <div className="w-3 h-3 rounded-full bg-[#ff5f56] hover:bg-[#ff5f56]/80 transition-colors"></div>
+          <div className="w-3 h-3 rounded-full bg-[#ffbd2e] hover:bg-[#ffbd2e]/80 transition-colors"></div>
+          <div className="w-3 h-3 rounded-full bg-[#27c93f] hover:bg-[#27c93f]/80 transition-colors"></div>
         </div>
+        
         <div className="flex items-center gap-2">
+          <FiTerminal className="text-[#D97757]" size={16} />
+          <span className="text-gray-400 font-medium text-sm select-none">Claude Code 终端</span>
+        </div>
+        
+        <div className="absolute right-4 flex items-center gap-2">
           <button
             onClick={handleCopy}
-            className="p-2 text-gray-400 hover:text-white transition-colors"
+            className="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-md transition-all"
             title="复制输出"
           >
-            <FiCopy size={18} />
+            <FiCopy size={16} />
           </button>
           <button
             onClick={clearTerminal}
-            className="p-2 text-gray-400 hover:text-white transition-colors"
+            className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-white/10 rounded-md transition-all"
             title="清空终端"
           >
-            <FiTrash2 size={18} />
+            <FiTrash2 size={16} />
           </button>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { FiHelpCircle, FiAward, FiMenu } from 'react-icons/fi';
+import { FaGithub } from 'react-icons/fa';
 import ProgressBar from '../Progress/ProgressBar';
 
 interface HeaderProps {
@@ -36,10 +37,10 @@ export default function Header({ onHelpClick, onAchievementsClick, onMenuClick, 
             <div className="relative">
               <button
                 onClick={onAchievementsClick}
-                className="p-2 text-gray-600 hover:text-red-600 transition-colors cursor-pointer"
+                className="p-1.5 text-gray-600 hover:text-red-600 transition-colors cursor-pointer"
                 title="成就"
               >
-                <FiAward size={24} />
+                <FiAward size={20} />
               </button>
               {newAchievementsCount > 0 && (
                 <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center animate-pulse">
@@ -49,11 +50,20 @@ export default function Header({ onHelpClick, onAchievementsClick, onMenuClick, 
             </div>
             <button
               onClick={onHelpClick}
-              className="p-2 text-gray-600 hover:text-red-600 transition-colors cursor-pointer"
+              className="p-1.5 text-gray-600 hover:text-red-600 transition-colors cursor-pointer"
               title="帮助"
             >
-              <FiHelpCircle size={24} />
+              <FiHelpCircle size={20} />
             </button>
+            <a
+              href="https://github.com/userwanyong/claude-code-interactive-tutorial"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 text-gray-600 hover:text-red-600 transition-colors"
+              title="GitHub"
+            >
+              <FaGithub size={20} />
+            </a>
           </div>
         </div>
       </div>

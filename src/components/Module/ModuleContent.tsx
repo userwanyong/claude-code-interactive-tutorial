@@ -1,6 +1,7 @@
 import type { LearningModule, UserProgress } from '../../types';
-import { FiCheckCircle } from 'react-icons/fi';
 import Typewriter from './Typewriter';
+import Confetti from '../Confetti/Confetti';
+import { useState, useEffect } from 'react';
 
 interface ModuleContentProps {
   module: LearningModule;
@@ -14,7 +15,8 @@ const isStepCompleted = (progress: UserProgress | null, moduleId: string, stepId
   return progress?.completedSteps[moduleId]?.includes(stepId) || false;
 };
 
-export default function ModuleContent({ module, currentStepId, onStepComplete, onNextModule, progress }: ModuleContentProps) {
+export default function ModuleContent({ module, currentStepId, onStepComplete, progress }: ModuleContentProps) {
+  const [showConfetti, setShowConfetti] = useState(false);
   const completedCount = module.steps.filter(step => isStepCompleted(progress, module.id, step.id)).length;
 
   const currentStep = currentStepId ? module.steps.find(s => s.id === currentStepId) : null;
@@ -23,8 +25,18 @@ export default function ModuleContent({ module, currentStepId, onStepComplete, o
   const completedSteps = module.steps.filter(step => isStepCompleted(progress, module.id, step.id));
   const reversedCompletedSteps = [...completedSteps].reverse();
 
+  useEffect(() => {
+    const confettiPlayed = localStorage.getItem('confettiPlayed');
+    if (isAllCompleted && completedCount === module.steps.length && completedCount > 0 && !confettiPlayed) {
+      setShowConfetti(true);
+      localStorage.setItem('confettiPlayed', 'true');
+    }
+  }, [isAllCompleted, completedCount, module.steps.length]);
+
   return (
     <div className="p-6">
+      <Confetti active={showConfetti} onComplete={() => setShowConfetti(false)} />
+      
       <div className="mb-6">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-3xl">{module.icon}</span>
@@ -56,6 +68,7 @@ export default function ModuleContent({ module, currentStepId, onStepComplete, o
             onClick={() => {
               if (confirm('确定要重置所有进度吗？这将清除所有学习记录和终端历史。')) {
                 localStorage.clear();
+                localStorage.removeItem('confettiPlayed');
                 window.location.reload();
               }
             }}
@@ -67,16 +80,16 @@ export default function ModuleContent({ module, currentStepId, onStepComplete, o
       ) : (
         <>
           {currentStep && (
-            <div className="p-3 rounded-lg border-2 border-red-400 bg-white mb-8 h-[100px] flex items-center">
+            <div className="p-3 rounded-xl border border-red-200 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 mb-8 h-[100px] flex items-center">
               <div className="w-full">
                 <div className="flex flex-col gap-2">
                   {currentStep.commands.length > 0 && (
                     <div className="flex items-center gap-3">
-                      <div className="px-3 py-1.5 bg-gray-900 text-green-400 rounded text-lg font-mono font-bold flex-shrink-0">
+                      <div className="px-3 py-1.5 bg-gray-900 text-green-400 rounded-lg shadow-sm text-lg font-mono font-bold flex-shrink-0">
                         {currentStep.commands[0].split(' ')[0]}
                       </div>
-                      <div className="text-gray-700 text-lg">
-                        <Typewriter text={currentStep.description} speed={30} />
+                      <div className="text-gray-700 text-lg font-bold">
+                        <Typewriter text={currentStep.description} speed={45} />
                       </div>
                     </div>
                   )}

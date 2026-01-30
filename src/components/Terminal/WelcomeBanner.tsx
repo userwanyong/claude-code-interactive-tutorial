@@ -1,5 +1,3 @@
-import { FiCpu } from 'react-icons/fi';
-
 export default function WelcomeBanner() {
   const primaryColor = '#D97757'; // 提取自截图的赤陶色
 

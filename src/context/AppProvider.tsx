@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AppContext, type AppContextType } from './AppContext';
 import { modules } from '../data/modules';
-import type { UserProgress } from '../types';
 
 interface AppProviderProps {
   children: React.ReactNode;

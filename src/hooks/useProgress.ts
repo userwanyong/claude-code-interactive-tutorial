@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useCallback } from 'react';
 import type { UserProgress, Achievement } from '../types';
 import { modules } from '../data/modules';
 import { useApp } from './useApp';
