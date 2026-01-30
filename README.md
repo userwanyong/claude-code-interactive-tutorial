@@ -9,7 +9,7 @@
 [Vite](https://img.shields.io/badge/Vite-7.2.4-646CFF?logo=vite)
 [Tailwind CSS](https://img.shields.io/badge/Tailwind-4.1.18-06B6D4?logo=tailwind-css)
 
-[English](README_EN.md) | [中文文档](README.md)
+[中文文档](README.md)
 
 </div>
 
@@ -190,7 +190,6 @@ claude-code-tutorial/
 如有问题或建议，欢迎通过以下方式联系：
 
 - 提交 [Issue](https://github.com/yourusername/claude-code-tutorial/issues)
-- 发送邮件至 your.email@example.com
 
 ---
 
